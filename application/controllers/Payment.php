@@ -33,10 +33,11 @@ class Payment extends CI_Controller {
 
     public function new_payment()
     {
+        $date = str_replace('/', '-', $this->input->post('date'));
         $data = array(
             'client_id' => $this->input->post('client_to_pick'),
             'amount' => $this->input->post('amount'),
-            'date' => date('Y-m-d', strtotime($this->input->post('date')))
+            'date' => date('Y-m-d', strtotime($date))
         );
         $this->db->insert('payment', $data);
         redirect('payment');
@@ -45,10 +46,11 @@ class Payment extends CI_Controller {
     public function update_payment()
     {
         $id = $this->input->post('id');
+        $date = str_replace('/', '-', $this->input->post('date'));
 
         $data = array(
             'amount' => $this->input->post('amount'),
-            'date' => date('Y-m-d', strtotime($this->input->post('date')))
+            'date' => date('Y-m-d', strtotime($date))
         );
 
         $this->db->where('id', $id);

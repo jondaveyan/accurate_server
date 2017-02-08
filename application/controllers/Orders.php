@@ -84,6 +84,7 @@ class Orders extends CI_Controller {
                 $this->db->where('id', $this->input->post('product_to_pick'.$i));
                 $this->db->update('products', array('quantity' => $new_quantity, 'sold_quantity' => $new_sold));
             }
+            $date = str_replace('/', '-', $this->input->post('date'.$i));
             $data = array(
                 'client_id' => $client_id ,
                 'product_id' => $this->input->post('product_to_pick'.$i) ,
@@ -91,7 +92,7 @@ class Orders extends CI_Controller {
                 'sale_price' => $sale_price,
                 'daily_price' => $daily_price,
                 'daily_sale' => $daily_sale,
-                'date' => date('Y-m-d', strtotime($this->input->post('date'.$i)))
+                'date' => date('Y-m-d', strtotime($date))
             );
             $this->db->insert('orders', $data);
         }
@@ -180,12 +181,13 @@ class Orders extends CI_Controller {
                 $this->db->update('products', array('daily_order' => $new_daily_order, 'quantity' => $new_quantity));
             }
         }
+        $date = str_replace('/', '-', $this->input->post('date'));
         $data = array(
             'product_quantity' => $this->input->post('quantity'),
             'sale_price' => $sale_price,
             'daily_price' => $daily_price,
             'daily_sale' => $daily_sale,
-            'date' => date('Y-m-d', strtotime($this->input->post('date')))
+            'date' => date('Y-m-d', strtotime($date))
         );
 
         $this->db->where('id', $this->input->post('id'));
@@ -214,13 +216,14 @@ class Orders extends CI_Controller {
         $new_daily_order = $daily_order - $old_order + $this->input->post('quantity');
         $this->db->where('id', $this->input->post('product_id'));
         $this->db->update('products', array('daily_order' => $new_daily_order));
+        $date = str_replace('/', '-', $this->input->post('date'));
 
         $data = array(
             'product_quantity' => $this->input->post('quantity'),
             'sale_price' => $sale_price,
             'daily_price' => $daily_price,
             'daily_sale' => $daily_sale,
-            'date' => date('Y-m-d', strtotime($this->input->post('date')))
+            'date' => date('Y-m-d', strtotime($date))
         );
 
         $this->db->where('id', $this->input->post('id'));

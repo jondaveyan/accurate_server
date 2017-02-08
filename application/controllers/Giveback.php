@@ -50,6 +50,7 @@ class Giveback extends CI_Controller {
 
         $this->db->where('id', $product_id);
         $this->db->update('products', array('bad_quantity' => $new_bad, 'useless_quantity' => $new_useless, 'daily_order' => $new_daily_order));
+        $date = str_replace('/', '-', $this->input->post('date'));
 
         $data = array(
             'client_id' => $this->input->post('client_to_pick'),
@@ -57,7 +58,7 @@ class Giveback extends CI_Controller {
             'quantity' => $this->input->post('product_quantity'),
             'bad_quantity' => $bad_quantity,
             'useless_quantity' => $useless_quantity,
-            'date' => date('Y-m-d', strtotime($this->input->post('date')))
+            'date' => date('Y-m-d', strtotime($date))
         );
         $this->db->insert('giveback', $data);
         redirect('giveback');
@@ -134,11 +135,12 @@ class Giveback extends CI_Controller {
 
         $this->db->where('id', $product_id);
         $this->db->update('products', array('daily_order' => $new_quantity, 'useless_quantity' => $new_useless_quantity));
+        $date = str_replace('/', '-', $this->input->post('date'));
 
         $data = array(
             'quantity' => $this->input->post('quantity'),
             'useless_quantity' => $this->input->post('useless_quantity'),
-            'date' => date('Y-m-d', strtotime($this->input->post('date')))
+            'date' => date('Y-m-d', strtotime($date))
         );
 
         $this->db->where('id', $id);
