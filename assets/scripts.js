@@ -32,7 +32,8 @@ function Save(){ var par = $(this).parent().parent();
     });
 };
 
-function Edit(){ var par = $(this).parent().parent();
+function Edit(){
+    var par = $(this).parent().parent();
     //var tdProduct = par.children("td:nth-child(1)");
     var tdQuantity = par.children("td:nth-child(2)");
     var tdPrice = par.children("td:nth-child(3)");
@@ -46,10 +47,20 @@ function Edit(){ var par = $(this).parent().parent();
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdType.html("<select style='width: 100%;' id='txtType'><option value='Օրավարձ'>Օրավարձ</option><option value='Վաճառք'>Վաճառք</option>");
     tdButtons.html('<button class="btnSave btn-info btn-xs"><span class="glyphicon glyphicon-ok"></span></button>');
+    $.ajax({
+        method: "get",
+        dataType: 'json',
+        url: 'welcome/check_user',
+        success: function(data) {
+            if(data.res == 'admin')
+            {
+                $(".btnSave").bind("click", Save);
+                $(".btnEdit").bind("click", Edit);
+                $(".btnDelete").bind("click", Delete);
+            }
+        }
+    });
 
-    $(".btnSave").bind("click", Save);
-    $(".btnEdit").bind("click", Edit);
-    $(".btnDelete").bind("click", Delete);
 };
 
 function Delete(){
@@ -107,9 +118,20 @@ function EditOwn(){ var par = $(this).parent().parent();
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveOwn btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    $(".btnSaveOwn").bind("click", SaveOwn);
-    $(".btnEditOwn").bind("click", EditOwn);
-    $(".btnDeleteOwn").bind("click", DeleteOwn);
+    $.ajax({
+        method: "get",
+        dataType: 'json',
+        url: 'welcome/check_user',
+        success: function(data) {
+            if(data.res == 'admin')
+            {
+                $(".btnSaveOwn").bind("click", SaveOwn);
+                $(".btnEditOwn").bind("click", EditOwn);
+                $(".btnDeleteOwn").bind("click", DeleteOwn);
+            }
+        }
+    });
+
 };
 
 function DeleteOwn(){
@@ -172,9 +194,20 @@ function EditGB(){ var par = $(this).parent().parent();
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveGB btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    $(".btnSaveGB").bind("click", SaveGB);
-    $(".btnEditGB").bind("click", EditGB);
-    $(".btnDeleteGB").bind("click", DeleteGB);
+    $.ajax({
+        method: "get",
+        dataType: 'json',
+        url: 'welcome/check_user',
+        success: function(data) {
+            if(data.res == 'admin')
+            {
+                $(".btnSaveGB").bind("click", SaveGB);
+                $(".btnEditGB").bind("click", EditGB);
+                $(".btnDeleteGB").bind("click", DeleteGB);
+            }
+        }
+    });
+
 };
 
 function DeleteGB(){
@@ -231,9 +264,20 @@ function EditP(){ var par = $(this).parent().parent();
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveP btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    $(".btnSaveP").bind("click", SaveP);
-    $(".btnEditP").bind("click", EditP);
-    $(".btnDeleteP").bind("click", DeleteP);
+    $.ajax({
+        method: "get",
+        dataType: 'json',
+        url: 'welcome/check_user',
+        success: function(data) {
+            if(data.res == 'admin')
+            {
+                $(".btnSaveP").bind("click", SaveP);
+                $(".btnEditP").bind("click", EditP);
+                $(".btnDeleteP").bind("click", DeleteP);
+            }
+        }
+    });
+
 };
 
 function DeleteP(){
@@ -347,14 +391,25 @@ $(document).ready(function(){
             url: 'dashboard/get_client_info/?client_id='+client_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                $(".btnEdit").bind("click", Edit);
-                $(".btnDelete").bind("click", Delete);
-                $(".btnEditOwn").bind("click", EditOwn);
-                $(".btnDeleteOwn").bind("click", DeleteOwn);
-                $(".btnEditGB").bind("click", EditGB);
-                $(".btnDeleteGB").bind("click", DeleteGB);
-                $(".btnEditP").bind("click", EditP);
-                $(".btnDeleteP").bind("click", DeleteP);
+                $.ajax({
+                    method: "get",
+                    dataType: 'json',
+                    url: 'welcome/check_user',
+                    success: function(data) {
+                        if(data.res == 'admin')
+                        {
+                            $(".btnEdit").bind("click", Edit);
+                            $(".btnDelete").bind("click", Delete);
+                            $(".btnEditOwn").bind("click", EditOwn);
+                            $(".btnDeleteOwn").bind("click", DeleteOwn);
+                            $(".btnEditGB").bind("click", EditGB);
+                            $(".btnDeleteGB").bind("click", DeleteGB);
+                            $(".btnEditP").bind("click", EditP);
+                            $(".btnDeleteP").bind("click", DeleteP);
+                        }
+                    }
+                });
+
             }
         });
     })
@@ -377,14 +432,25 @@ $(document).ready(function(){
             url: 'dashboard/get_product_client_info/?client_id='+client_id+'&product_id='+product_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                $(".btnEdit").bind("click", Edit);
-                $(".btnDelete").bind("click", Delete);
-                $(".btnEditOwn").bind("click", EditOwn);
-                $(".btnDeleteOwn").bind("click", DeleteOwn);
-                $(".btnEditGB").bind("click", EditGB);
-                $(".btnDeleteGB").bind("click", DeleteGB);
-                $(".btnEditP").bind("click", EditP);
-                $(".btnDeleteP").bind("click", DeleteP);
+                $.ajax({
+                    method: "get",
+                    dataType: 'json',
+                    url: 'welcome/check_user',
+                    success: function(data) {
+                        if(data.res == 'admin')
+                        {
+                            $(".btnEdit").bind("click", Edit);
+                            $(".btnDelete").bind("click", Delete);
+                            $(".btnEditOwn").bind("click", EditOwn);
+                            $(".btnDeleteOwn").bind("click", DeleteOwn);
+                            $(".btnEditGB").bind("click", EditGB);
+                            $(".btnDeleteGB").bind("click", DeleteGB);
+                            $(".btnEditP").bind("click", EditP);
+                            $(".btnDeleteP").bind("click", DeleteP);
+                        }
+                    }
+                });
+
             }
         });
     })
@@ -406,14 +472,25 @@ $(document).ready(function(){
             url: 'dashboard/get_product_info/?product_id='+product_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                $(".btnEdit").bind("click", Edit);
-                $(".btnDelete").bind("click", Delete);
-                $(".btnEditOwn").bind("click", EditOwn);
-                $(".btnDeleteOwn").bind("click", DeleteOwn);
-                $(".btnEditGB").bind("click", EditGB);
-                $(".btnDeleteGB").bind("click", DeleteGB);
-                $(".btnEditP").bind("click", EditP);
-                $(".btnDeleteP").bind("click", DeleteP);
+                $.ajax({
+                    method: "get",
+                    dataType: 'json',
+                    url: 'welcome/check_user',
+                    success: function(data) {
+                        if(data.res == 'admin')
+                        {
+                            $(".btnEdit").bind("click", Edit);
+                            $(".btnDelete").bind("click", Delete);
+                            $(".btnEditOwn").bind("click", EditOwn);
+                            $(".btnDeleteOwn").bind("click", DeleteOwn);
+                            $(".btnEditGB").bind("click", EditGB);
+                            $(".btnDeleteGB").bind("click", DeleteGB);
+                            $(".btnEditP").bind("click", EditP);
+                            $(".btnDeleteP").bind("click", DeleteP);
+                        }
+                    }
+                });
+
             }
         });
     })
@@ -426,14 +503,25 @@ $(document).ready(function(){
             url: 'dashboard/get_client_info/?client_id='+el.data('client_id'),
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                $(".btnEdit").bind("click", Edit);
-                $(".btnDelete").bind("click", Delete);
-                $(".btnEditOwn").bind("click", EditOwn);
-                $(".btnDeleteOwn").bind("click", DeleteOwn);
-                $(".btnEditGB").bind("click", EditGB);
-                $(".btnDeleteGB").bind("click", DeleteGB);
-                $(".btnEditP").bind("click", EditP);
-                $(".btnDeleteP").bind("click", DeleteP);
+                $.ajax({
+                    method: "get",
+                    dataType: 'json',
+                    url: 'welcome/check_user',
+                    success: function(data) {
+                        if(data.res == 'admin')
+                        {
+                            $(".btnEdit").bind("click", Edit);
+                            $(".btnDelete").bind("click", Delete);
+                            $(".btnEditOwn").bind("click", EditOwn);
+                            $(".btnDeleteOwn").bind("click", DeleteOwn);
+                            $(".btnEditGB").bind("click", EditGB);
+                            $(".btnDeleteGB").bind("click", DeleteGB);
+                            $(".btnEditP").bind("click", EditP);
+                            $(".btnDeleteP").bind("click", DeleteP);
+                        }
+                    }
+                });
+
             }
         });
     })
