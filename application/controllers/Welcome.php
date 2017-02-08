@@ -21,15 +21,56 @@ class Welcome extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->database();
+        $this->load->library('session');
     }
 
     public function index()
     {
-        $query = $this->db->get('clients');
+        /*$query = $this->db->get('clients');
         $clients = $query->result();
         $query = $this->db->get('products');
         $products = $query->result();
-        $data = array('clients' => $clients, 'products' => $products);
-        $this->load->view('welcome', $data);
+        $data = array('clients' => $clients, 'products' => $products);*/
+        if($this->session->has_userdata('logged_in'))
+        {
+            $this->load->view('welcome');
+        }
+        else
+        {
+            $this->load->view('login');
+        }
+    }
+
+    public function login()
+    {
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $this->db->select();
+        $this->db->from('users');
+        $this->db->where('username', $username);
+        $this->db->where('password', md5($password));
+        $query = $this->db->get();
+        if($query->num_rows() > 0)
+        {
+            $newdata = array(
+                'username'  => $username,
+                'logged_in' => TRUE
+            );
+
+            $this->session->set_userdata($newdata);
+        }
+        redirect('welcome');
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('username');
+        redirect('welcome');
+    }
+
+    public function check_user()
+    {
+        echo json_encode(array('res' => $this->session->userdata('username')));
     }
 }
