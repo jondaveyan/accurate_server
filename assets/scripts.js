@@ -362,6 +362,20 @@ $(document).ready(function(){
         });
     })
 
+    $(document).on('click', '.get_product', function(){
+        var el = $(this);
+        $.ajax({
+            method: "get",
+            dataType: 'json',
+            url: 'getproduct/get_products/?product_name='+el.data('product_name'),
+            success: function(data) {
+                $('#myModal .modal-content').html(data.html);
+                $('.modal-title').text(el.data('product_name'));
+                $('.modal-body table').DataTable();
+            }
+        });
+    })
+
     $(document).on('click', '.product_client_info', function(){
         var el = $(this);
         $.ajax({
