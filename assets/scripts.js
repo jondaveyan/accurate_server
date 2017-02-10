@@ -363,7 +363,7 @@ $(document).ready(function(){
     })
 
     $(document).on('click', '.get_product', function(){
-        var el = $(this);alert("A");
+        var el = $(this);
         $.ajax({
             method: "get",
             dataType: 'json',
