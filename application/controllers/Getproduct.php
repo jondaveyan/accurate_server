@@ -8,7 +8,7 @@ class Getproduct extends CI_Controller {
     }
     public function index()
     {
-        $this->db->select('product_name, date');
+        $this->db->select('product_name');
         $this->db->select_sum('product_quantity');
         $this->db->group_by('product_name');
         $query = $this->db->get('new_products')->result();
