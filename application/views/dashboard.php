@@ -1,7 +1,8 @@
 <?php $this->load->view('header'); ?>
 <div id="container">
 	<a href="welcome"><button class="btn btn-default">Հետ</button></a>
-	<a href="debts"><button class="btn btn-default">Պարտքերի աղյուսակ</button></a><br><br>
+	<a href="debts"><button class="btn btn-default">Պարտքերի աղյուսակ</button></a>
+	<a href="getproduct"><button class="btn btn-default">Ներմուծում</button></a><br><br>
 	<div id="products_table">
 		<table>
 		<thead>
@@ -27,7 +28,7 @@
 				foreach($products as $key => $product)
 				{
 					echo '<tr><td data-toggle="modal" data-target="#myModal" class="clickable product_info" data-product_id="'.$product->id.'">'.$product->name.'</td>';
-					echo '<td>'.$product->quantity.'</td>';
+					echo '<td>'.($product->quantity+$product->new_quantity).'</td>';
 					echo '<td>'.$product->sold_quantity.'</td>';
 					echo '<td>'.($product->quantity-$product->daily_order).'</td>';
 					echo '<td>'.$product->useless_quantity.'</td>';

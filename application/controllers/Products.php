@@ -32,29 +32,49 @@ class Products extends CI_Controller {
     }
     public function new_product()
     {
+        $new_quantity = intval($this->input->post('new_quantity')) + intval($this->input->post('get_quantity'));
         $data = array(
             'name' => $this->input->post('name') ,
             'quantity' => $this->input->post('quantity') ,
-            'new_quantity' => $this->input->post('new_quantity'),
+            'new_quantity' => $new_quantity,
             'type' => $this->input->post('type'),
             'bad_quantity' => $this->input->post('bad_quantity'),
             'useless_quantity' => $this->input->post('useless_quantity')
         );
         $this->db->insert('products', $data);
+        $data = array(
+            'product_name' => $this->input->post('name'),
+            'product_quantity' => $this->input->post('get_quantity'),
+            'date' => date("Y-m-d")
+        );
+        if($this->input->post('get_quantity') != "" || $this->input->post('get_quantity') != 0)
+        {
+            $this->db->insert('new_products', $data);
+        }
         redirect('products');
     }
     public function edit_product($id)
     {
+        $new_quantity = intval($this->input->post('new_quantity')) + intval($this->input->post('get_quantity'));
         $data = array(
             'name' => $this->input->post('name') ,
             'quantity' => $this->input->post('quantity') ,
-            'new_quantity' => $this->input->post('new_quantity'),
+            'new_quantity' => $new_quantity,
             'type' => $this->input->post('type'),
             'bad_quantity' => $this->input->post('bad_quantity'),
             'useless_quantity' => $this->input->post('useless_quantity')
         );
         $this->db->where('id', $id);
         $this->db->update('products', $data);
+        $data = array(
+            'product_name' => $this->input->post('name'),
+            'product_quantity' => $this->input->post('get_quantity'),
+            'date' => date("Y-m-d")
+        );
+        if($this->input->post('get_quantity') != "" || $this->input->post('get_quantity') != 0)
+        {
+            $this->db->insert('new_products', $data);
+        }
         redirect('products');
     }
     public function get_product_details($id)
