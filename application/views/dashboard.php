@@ -30,7 +30,7 @@
 					echo '<tr><td data-toggle="modal" data-target="#myModal" class="clickable product_info" data-product_id="'.$product->id.'">'.$product->name.'</td>';
 					echo '<td>'.($product->quantity+$product->new_quantity).'</td>';
 					echo '<td>'.$product->sold_quantity.'</td>';
-					echo '<td>'.($product->quantity-$product->daily_order).'</td>';
+					echo '<td>'.($product->quantity+$product->new_quantity-$product->daily_order).'</td>';
 					echo '<td>'.$product->useless_quantity.'</td>';
 					echo '<td>'.$product->bad_quantity.'</td>';
 					echo '<td data-id="'.$product->id.'" class="clickable daily_order">'.$product->daily_order.'</td>';
