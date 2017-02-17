@@ -141,6 +141,7 @@ class Dashboard extends CI_Controller {
  		$this->db->where('client_id', $client_id);
  		$this->db->from('giveback');
  		$this->db->join('products', 'giveback.product_id = products.id');
+        $this->db->order_by('giveback.date');
  		$givebacks_html = $this->db->get()->result();
 
         if($client->own == "yes")
@@ -370,15 +371,26 @@ class Dashboard extends CI_Controller {
 				}
 				if($check_tr == true)
 				{
-					$html .= '<tr><td colspan="6">'.$res_sum.'</td></tr>';
+					$html .= '<tr><td></td><td colspan="2">'.$res_sum.'</td><td colspan="3"></td></tr>';
 				}
 				$html .= '<tr data-id="'.$order->id.'" data-product_id="'.$order->product_id.'"><td>'.$order->name.'</td><td>'.$order->product_quantity.'</td><td>'.$price.'</td><td>'.$order->date.'</td>'.$daily_sale.'<td><button class="btnEdit btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDelete btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
 			}
-			$html .= '<tr><td colspan="6">'.$sum.'</td></tr>';
+			$html .= '<tr><td></td><td colspan="2">'.$sum.'</td><td colspan="3"></td></tr>';
 			$html .= '</table></div><div class="horizontal-div"><h3>Վերադարձ</h3>';
 			$html .= '<table class="table"><thead><th>Ապրանք</th><th>Քանակ</th><th>Ջարդ.</th><th>Ամսաթիվ</th><th>Գործ.</th></thead>';
+            $check = 0;
+            $sum = 0;
+            $check_tr = false;
+            $res_sum = 0;
 			foreach($givebacks_html as $giveback)
 			{
+                $this->db->where('product_id', $giveback->product_id);
+                $this->db->where('client_id', $client_id);
+                $this->db->where('daily_sale', 'daily');
+                $this->db->order_by("id", "desc");
+                $query = $this->db->get('orders')->result();
+                $giveback_price = $query[0]->daily_price;
+                $check_tr = false;
                 if($interval)
                 {
                     if(strtotime($giveback->date) < strtotime($datepicker_start) || strtotime($giveback->date) > strtotime($datepicker_end))
@@ -386,8 +398,28 @@ class Dashboard extends CI_Controller {
                         continue;
                     }
                 }
+                if(strtotime($giveback->date) != $check)
+                {
+                    if($check != 0)
+                    {
+                        $check_tr = true;
+                        $res_sum = $sum;
+                    }
+                    $check = strtotime($giveback->date);
+                    $sum = $giveback->quantity * $giveback_price;
+                }
+                else
+                {
+                    $sum += $giveback->quantity * $giveback_price;
+                }
+                if($check_tr == true)
+                {
+                    $html .= '<tr><td></td><td colspan="2">'.$res_sum.'</td><td colspan="2"></td></tr>';
+                }
+                var_dump($giveback->product_id, $giveback_price);
 				$html .= '<tr data-id="'.$giveback->id.'" data-product_id="'.$giveback->product_id.'"><td>'.$giveback->product_name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->useless_quantity.'</td><td>'.$giveback->date.'</td><td><button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
-			}
+			}die();
+            $html .= '<tr><td></td><td colspan="2">'.$sum.'</td><td colspan="2"></td></tr>';
 			$html .= '</table></div></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Փակել</button></div>';
             echo json_encode(array('html' => $html));
         }
