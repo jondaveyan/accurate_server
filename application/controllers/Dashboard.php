@@ -416,9 +416,8 @@ class Dashboard extends CI_Controller {
                 {
                     $html .= '<tr><td></td><td colspan="2">'.$res_sum.'</td><td colspan="2"></td></tr>';
                 }
-                var_dump($giveback->product_id, $giveback_price);
 				$html .= '<tr data-id="'.$giveback->id.'" data-product_id="'.$giveback->product_id.'"><td>'.$giveback->product_name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->useless_quantity.'</td><td>'.$giveback->date.'</td><td><button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
-			}die();
+			}
             $html .= '<tr><td></td><td colspan="2">'.$sum.'</td><td colspan="2"></td></tr>';
 			$html .= '</table></div></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Փակել</button></div>';
             echo json_encode(array('html' => $html));
