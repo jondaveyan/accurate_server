@@ -73,16 +73,26 @@ class Orders extends CI_Controller {
                 $daily_price = 0;
                 $sale_price = $this->input->post('product_price'.$i);
                 $this->db->where('id', $this->input->post('product_to_pick'.$i));
-                $this->db->select('quantity, sold_quantity');
+                $this->db->select('quantity, sold_quantity, new_quantity');
                 $this->db->from('products');
                 $query = $this->db->get();
                 $quantity = $query->result();
                 $sold = intval($quantity[0]->sold_quantity);
                 $quantity = intval($quantity[0]->quantity);
-                $new_quantity = $quantity - intval($this->input->post('product_quantity'.$i));
+                $new_product_quantity = intval($quantity[0]->new_quantity);
+                if($quantity < intval($this->input->post('product_quantity'.$i)))
+                {
+                    $new_product_quantity = $new_product_quantity - (intval($this->input->post('product_quantity'.$i)) - $quantity);
+                    $new_quantity = 0;
+                }
+                else
+                {
+                    $new_quantity = $quantity - intval($this->input->post('product_quantity'.$i));
+                }
+                
                 $new_sold = $sold + intval($this->input->post('product_quantity'.$i));
                 $this->db->where('id', $this->input->post('product_to_pick'.$i));
-                $this->db->update('products', array('quantity' => $new_quantity, 'sold_quantity' => $new_sold));
+                $this->db->update('products', array('quantity' => $new_quantity, 'sold_quantity' => $new_sold, 'new_quantity' => $new_product_quantity));
             }
             $date = str_replace('/', '-', $this->input->post('date'.$i));
             $data = array(
