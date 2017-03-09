@@ -37,7 +37,7 @@
                 ?>
             </select><br>
             Ապրանքի քանակ:<br>
-            <input id="product_quantity1" class="product_quantity" type="number" step="0.001" max="<?php echo $products[0]->quantity-$products[0]->daily_order; ?>" name="product_quantity1" />
+            <input id="product_quantity1" class="product_quantity" type="number" step="0.001" max="<?php echo $products[0]->quantity+$products[0]->new_quantity-$products[0]->daily_order; ?>" name="product_quantity1" />
             <span id="product_type1" class="product_type"><?php echo $products[0]->type; ?></span><br>
             Վարձակալություն:
             <input id="daily1" class="daily" type="checkbox" name="daily1" checked/>
