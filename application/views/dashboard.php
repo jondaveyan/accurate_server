@@ -11,8 +11,8 @@
 				<th style="vertical-align: middle; width: 30px;">Քան.</th>
 				<th style="vertical-align: middle; width: 30px;">Վաճ.</th>
 				<th style="vertical-align: middle; width: 30px;">Պահ.</th>
-				<th style="vertical-align: middle; width: 30px;">Ջրդ.</th>
-				<th style="vertical-align: middle; width: 30px;">Վն.</th>
+				<!-- <th style="vertical-align: middle; width: 30px;">Ջրդ.</th>
+				<th style="vertical-align: middle; width: 30px;">Վն.</th> -->
 				<th style="vertical-align: middle; width: 30px;">Վարձ.</th>
 				<th style="vertical-align: middle; width: 30px;">Գույք.</th>
 				<?php
@@ -31,8 +31,8 @@
 					echo '<td>'.($product->quantity+$product->new_quantity).'</td>';
 					echo '<td>'.$product->sold_quantity.'</td>';
 					echo '<td>'.($product->quantity+$product->new_quantity-$product->daily_order).'</td>';
-					echo '<td>'.$product->useless_quantity.'</td>';
-					echo '<td>'.$product->bad_quantity.'</td>';
+					/*echo '<td>'.$product->useless_quantity.'</td>';
+					echo '<td>'.$product->bad_quantity.'</td>';*/
 					echo '<td data-id="'.$product->id.'" class="clickable daily_order">'.$product->daily_order.'</td>';
 					echo '<td></td>';
 					if(isset($res[$product->name]))
