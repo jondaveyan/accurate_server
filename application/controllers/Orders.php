@@ -76,10 +76,10 @@ class Orders extends CI_Controller {
                 $this->db->select('quantity, sold_quantity, new_quantity');
                 $this->db->from('products');
                 $query = $this->db->get();
-                $quantity = $query->result();
-                $sold = intval($quantity[0]->sold_quantity);
-                $quantity = intval($quantity[0]->quantity);
-                $new_product_quantity = intval($quantity[0]->new_quantity);
+                $res = $query->result();
+                $sold = intval($res[0]->sold_quantity);
+                $quantity = intval($res[0]->quantity);
+                $new_product_quantity = intval($res[0]->new_quantity);
                 if($quantity < intval($this->input->post('product_quantity'.$i)))
                 {
                     $new_product_quantity = $new_product_quantity - (intval($this->input->post('product_quantity'.$i)) - $quantity);
