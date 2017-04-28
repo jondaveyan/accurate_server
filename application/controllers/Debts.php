@@ -67,6 +67,7 @@ class Debts extends CI_Controller {
             {
                 $this->db->where('client_id', $client_id);
                 $this->db->where('product_id', $giveback->product_id);
+	    	$this->db->where('daily_sale', 'daily');
                 $query = $this->db->get('orders');
                 $product_price = $query->result();
                 $product_price = $product_price[0]->daily_price;
