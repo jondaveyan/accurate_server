@@ -42,8 +42,22 @@ class Dashboard extends CI_Controller {
 		{
 			if(!in_array($val->client_name, $clients))
 			{
-				$clients[] = $val->client_name;
-				$client_ids[] = $val->client_id;
+				if($val->own == "yes")
+				{
+					$clients[] = $val->client_name;
+					$client_ids[] = $val->client_id;
+				}
+			}
+		}
+		foreach($data as $key => $val)
+		{
+			if(!in_array($val->client_name, $clients))
+			{
+				if($val->own == "no")
+				{
+					$clients[] = $val->client_name;
+					$client_ids[] = $val->client_id;
+				}
 			}
 		}
 		$res = array();
