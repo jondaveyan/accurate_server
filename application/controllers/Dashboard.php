@@ -402,6 +402,7 @@ class Dashboard extends CI_Controller {
                 $this->db->where('product_id', $giveback->product_id);
                 $this->db->where('client_id', $client_id);
                 $this->db->where('daily_sale', 'daily');
+		$this->db->where('date <=', $giveback->date);
                 $this->db->order_by("id", "desc");
                 $query = $this->db->get('orders')->result();
                 $giveback_price = $query[0]->daily_price;
