@@ -55,8 +55,16 @@ class Dashboard extends CI_Controller {
 			{
 				if($val->own == "no")
 				{
-					$clients[] = $val->client_name;
-					$client_ids[] = $val->client_id;
+					if($val->client_id == 188)
+					{
+						array_unshift($clients, $val->client_name);
+						array_unshift($client_ids, $val->client_id);
+					}
+					else
+					{
+						$clients[] = $val->client_name;
+						$client_ids[] = $val->client_id;
+					}
 				}
 			}
 		}
