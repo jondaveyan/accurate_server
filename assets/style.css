@@ -8,6 +8,9 @@
     right: 0;
     z-index: 50;
 }
+.klass-erik{
+    background-color: #d8bc35;
+}
 .order_popup{
     display: none;
     margin-top: 10px;
