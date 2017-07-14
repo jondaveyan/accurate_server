@@ -16,9 +16,19 @@
 				<th style="vertical-align: middle; width: 30px;">Վարձ.</th>
 				<th style="vertical-align: middle; width: 30px;">Գույք.</th>
 				<?php
+				$i = 0;
+				$class = '';
 				foreach($clients as $key => $client)
 				{
-					echo '<th style="width: 30px;" data-client_id="'.$client_ids[$key].'" data-toggle="modal" data-target="#myModal" class="clickable client_info verticalTableHeader"><div>'.$client.'</div></th>';
+					if($i == 0)
+					{
+						$class = 'klass-erik';
+					}
+					else
+					{
+						$class = '';
+					}
+					echo '<th style="width: 30px;" data-client_id="'.$client_ids[$key].'" data-toggle="modal" data-target="#myModal" class="clickable '.$class.' client_info verticalTableHeader"><div>'.$client.'</div></th>';
 				}
 				/*foreach($clients_with_debt as $key => $value)
 				{
