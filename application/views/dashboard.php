@@ -29,6 +29,7 @@
 						$class = '';
 					}
 					echo '<th style="width: 30px;" data-client_id="'.$client_ids[$key].'" data-toggle="modal" data-target="#myModal" class="clickable '.$class.' client_info verticalTableHeader"><div>'.$client.'</div></th>';
+					$i++;
 				}
 				/*foreach($clients_with_debt as $key => $value)
 				{
