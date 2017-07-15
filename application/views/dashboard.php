@@ -48,23 +48,43 @@
 					echo '<td></td>';
 					if(isset($res[$product->name]))
 					{
+						$i = 0;
 						foreach($clients as $k => $client)
 						{
-							if(isset($res[$product->name][$client]))
+							if($i == 0)
 							{
-								echo '<td data-client_id="'.$client_ids[$k].'" data-product_id="'.$product->id.'"data-toggle="modal" data-target="#myModal" class="clickable product_client_info">'.$res[$product->name][$client].'</td>';
+								$class = 'klass-erik';
 							}
 							else
 							{
-								echo '<td data-client_id="'.$client_ids[$k].'" data-product_id="'.$product->id.'"data-toggle="modal" data-target="#myModal" class="clickable product_client_info"></td>';
+								$class = '';
 							}
+							if(isset($res[$product->name][$client]))
+							{
+								echo '<td data-client_id="'.$client_ids[$k].'" data-product_id="'.$product->id.'"data-toggle="modal" data-target="#myModal" class="clickable '.$class.' product_client_info">'.$res[$product->name][$client].'</td>';
+							}
+							else
+							{
+								echo '<td data-client_id="'.$client_ids[$k].'" data-product_id="'.$product->id.'"data-toggle="modal" data-target="#myModal" class="clickable '.$class.' product_client_info"></td>';
+							}
+							$i++;
 						}
 					}
 					else
 					{
+						$i = 0;
 						foreach($clients as $k => $client)
 						{
-							echo '<td data-client_id="'.$client_ids[$k].'" data-product_id="'.$product->id.'"data-toggle="modal" data-target="#myModal" class="clickable product_client_info"></td>';
+							if($i == 0)
+							{
+								$class = 'klass-erik';
+							}
+							else
+							{
+								$class = '';
+							}
+							echo '<td data-client_id="'.$client_ids[$k].'" data-product_id="'.$product->id.'"data-toggle="modal" data-target="#myModal" class="clickable '.$class.' product_client_info"></td>';
+							$i++;
 						}
 					}
 					/*for($i = 0; $i<count($clients_with_debt); $i++)
