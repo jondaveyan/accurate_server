@@ -9,7 +9,10 @@
     z-index: 50;
 }
 .klass-erik{
-    background-color: #ffad7d;
+    background-color: #cfe4ef;
+}
+#products_table table{
+    font-size: 13px;
 }
 .order_popup{
     display: none;
