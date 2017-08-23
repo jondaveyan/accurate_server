@@ -201,7 +201,7 @@ class Dashboard extends CI_Controller {
 				$html .= '<tr data-id="'.$order->id.'" data-product_id="'.$order->product_id.'"><td>'.$order->name.'</td><td>'.$order->product_quantity.'</td><td>'.$order->date.'</td><td><button class="btnEditOwn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteOwn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td><tr>';
 			}
 			$html .= '</table></div><div class="col-md-6"><h3>Վերադարձ</h3>';
-			$html .= '<table class="table"><thead><th>Ապրանք</th><th>Քանակ</th><th>Ջարդ.</th><th>Ամսաթիվ</th><th>Գործ.</th></thead>';
+			$html .= '<table class="table"><thead><th>Ապրանք</th><th>Քանակ</th><th>Ամսաթիվ</th><th>Գործ.</th></thead>';
 			foreach($givebacks_html as $giveback)
 			{
                 if($interval)
@@ -211,7 +211,7 @@ class Dashboard extends CI_Controller {
                         continue;
                     }
                 }
-				$html .= '<tr data-id="'.$giveback->id.'" data-product_id="'.$giveback->product_id.'"><td>'.$giveback->product_name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->useless_quantity.'</td><td>'.$giveback->date.'</td><td><button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
+				$html .= '<tr data-id="'.$giveback->id.'" data-product_id="'.$giveback->product_id.'"><td>'.$giveback->product_name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->date.'</td><td><button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
 			}
 			$html .= '</table></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Փակել</button></div>';
 
@@ -400,7 +400,7 @@ class Dashboard extends CI_Controller {
 			}
 			$html .= '<tr><td></td><td colspan="2">'.$sum.'</td><td colspan="3"></td></tr>';
 			$html .= '</table></div><div class="horizontal-div"><h3>Վերադարձ</h3>';
-			$html .= '<table class="table"><thead><th>Ապրանք</th><th>Քանակ</th><th>Ջարդ.</th><th>Ամսաթիվ</th><th>Գործ.</th></thead>';
+			$html .= '<table class="table"><thead><th>Ապրանք</th><th>Քանակ</th><th>Ամսաթիվ</th><th>Գործ.</th></thead>';
             $check = 0;
             $sum = 0;
             $check_tr = false;
@@ -440,7 +440,7 @@ class Dashboard extends CI_Controller {
                 {
                     $html .= '<tr><td></td><td colspan="2">'.$res_sum.'</td><td colspan="2"></td></tr>';
                 }
-				$html .= '<tr data-id="'.$giveback->id.'" data-product_id="'.$giveback->product_id.'"><td>'.$giveback->product_name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->useless_quantity.'</td><td>'.$giveback->date.'</td><td><button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
+				$html .= '<tr data-id="'.$giveback->id.'" data-product_id="'.$giveback->product_id.'"><td>'.$giveback->product_name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->date.'</td><td><button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
 			}
             $html .= '<tr><td></td><td colspan="2">'.$sum.'</td><td colspan="2"></td></tr>';
 			$html .= '</table></div></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Փակել</button></div>';
