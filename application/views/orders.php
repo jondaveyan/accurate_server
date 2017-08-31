@@ -1,7 +1,7 @@
 <?php $this->load->view('header'); ?>
 <div class="orders col-md-12 col-lg-12">
     <button id="new_order" class="btn btn-default">Նոր գործարք</button>
-    <a href="welcome"><button class="btn btn-default">Հետ</button></a>
+    <button class="goToMenu btn btn-default">Հետ</button>
 </div>
 <div class="order_popup col-md-12 col-lg-12" id="new_order_popup">
     <div class="col-md-12 col-lg-12" style="padding-left: 0px;">
