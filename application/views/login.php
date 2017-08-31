@@ -1,6 +1,6 @@
 <?php $this->load->view('header'); ?>
 <div class="container">
-    <form method="POST" action="welcome/login">
+    <form method="POST" action="<?php echo base_url('welcome/login'); ?>">
         Username:
         <input name="username" class="form-control" type="text" />
         Password:
