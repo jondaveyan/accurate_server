@@ -35,7 +35,7 @@
 <div class="clients">
     <button id="new_client" class="btn btn-default">Նոր կլիենտ</button>
     <button id="edit_client" class="btn btn-default">Փոփոխել</button>
-    <a href="welcome"><button class="btn btn-default">Հետ</button></a>
+    <button class="goToMenu btn btn-default">Հետ</button>
 </div>
 
 <?php $this->load->view('footer'); ?>
