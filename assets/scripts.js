@@ -47,19 +47,12 @@ function Edit(){
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdType.html("<select style='width: 100%;' id='txtType'><option value='Օրավարձ'>Օրավարձ</option><option value='Վաճառք'>Վաճառք</option>");
     tdButtons.html('<button class="btnSave btn-info btn-xs"><span class="glyphicon glyphicon-ok"></span></button>');
-    $.ajax({
-        method: "get",
-        dataType: 'json',
-        url: 'welcome/check_user',
-        success: function(data) {
-            if(data.res == 'admin')
-            {
-                $(".btnSave").bind("click", Save);
-                $(".btnEdit").bind("click", Edit);
-                $(".btnDelete").bind("click", Delete);
-            }
-        }
-    });
+    if(localStorage.getItem('username') == 'admin')
+    {
+        $(".btnSave").bind("click", Save);
+        $(".btnEdit").bind("click", Edit);
+        $(".btnDelete").bind("click", Delete);
+    }
 
 };
 
@@ -118,19 +111,12 @@ function EditOwn(){ var par = $(this).parent().parent();
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveOwn btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    $.ajax({
-        method: "get",
-        dataType: 'json',
-        url: 'welcome/check_user',
-        success: function(data) {
-            if(data.res == 'admin')
-            {
-                $(".btnSaveOwn").bind("click", SaveOwn);
-                $(".btnEditOwn").bind("click", EditOwn);
-                $(".btnDeleteOwn").bind("click", DeleteOwn);
-            }
-        }
-    });
+    if(localStorage.getItem('username') == 'admin')
+    {
+        $(".btnSaveOwn").bind("click", SaveOwn);
+        $(".btnEditOwn").bind("click", EditOwn);
+        $(".btnDeleteOwn").bind("click", DeleteOwn);
+    }
 
 };
 
@@ -195,19 +181,12 @@ function EditGB(){
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveGB btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    $.ajax({
-        method: "get",
-        dataType: 'json',
-        url: 'welcome/check_user',
-        success: function(data) {
-            if(data.res == 'admin')
-            {
-                $(".btnSaveGB").bind("click", SaveGB);
-                $(".btnEditGB").bind("click", EditGB);
-                $(".btnDeleteGB").bind("click", DeleteGB);
-            }
-        }
-    });
+    if(localStorage.getItem('username') == 'admin')
+    {
+        $(".btnSaveGB").bind("click", SaveGB);
+        $(".btnEditGB").bind("click", EditGB);
+        $(".btnDeleteGB").bind("click", DeleteGB);
+    }
 
 };
 
@@ -265,19 +244,12 @@ function EditP(){ var par = $(this).parent().parent();
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveP btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    $.ajax({
-        method: "get",
-        dataType: 'json',
-        url: 'welcome/check_user',
-        success: function(data) {
-            if(data.res == 'admin')
-            {
-                $(".btnSaveP").bind("click", SaveP);
-                $(".btnEditP").bind("click", EditP);
-                $(".btnDeleteP").bind("click", DeleteP);
-            }
-        }
-    });
+    if(localStorage.getItem('username') == 'admin')
+    {
+        $(".btnSaveP").bind("click", SaveP);
+        $(".btnEditP").bind("click", EditP);
+        $(".btnDeleteP").bind("click", DeleteP);
+    }
 
 };
 
@@ -299,6 +271,14 @@ function DeleteP(){
 
 
 $(document).ready(function(){
+
+
+    setTimeout(function(){ 
+        if(localStorage.getItem('username') == null && window.location.href.substr(window.location.href.lastIndexOf('/') + 1) != '' && window.location.href.substr(window.location.href.lastIndexOf('/') + 1) != 'welcome')
+        {
+            window.location.href = window.location.origin;
+        }
+    }, 1000);
 
     $('#products_table table').DataTable({'pageLength': 17, aLengthMenu: [
         [25, 50, 100, 200, -1],
@@ -322,7 +302,16 @@ $(document).ready(function(){
                 $('#product_client_popup').show();
             }
         });
-    })
+    });
+
+    $(document).on('click', '#logoutBtn', function(event){
+        localStorage.clear();
+        window.location.href = window.location.origin;
+    });
+
+    $(document).on('click', '.goToMenu', function(event){
+        window.location.href = window.location.origin+"/welcome/login/"+localStorage.getItem('username');
+    });
 
     $(document).on('change', '#debt_date', function(){
         var date = $(this).val();
@@ -406,24 +395,18 @@ $(document).ready(function(){
             url: 'dashboard/get_client_info/?client_id='+client_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                $.ajax({
-                    method: "get",
-                    dataType: 'json',
-                    url: 'welcome/check_user',
-                    success: function(data) {
-                        if(data.res == 'admin')
-                        {alert("A");
-                            $(".btnEdit").bind("click", Edit);
-                            $(".btnDelete").bind("click", Delete);
-                            $(".btnEditOwn").bind("click", EditOwn);
-                            $(".btnDeleteOwn").bind("click", DeleteOwn);
-                            $(".btnEditGB").bind("click", EditGB);
-                            $(".btnDeleteGB").bind("click", DeleteGB);
-                            $(".btnEditP").bind("click", EditP);
-                            $(".btnDeleteP").bind("click", DeleteP);
-                        }
-                    }
-                });
+                if(localStorage.getItem('username') == 'admin')
+                {
+                    $(".btnEdit").bind("click", Edit);
+                    $(".btnDelete").bind("click", Delete);
+                    $(".btnEditOwn").bind("click", EditOwn);
+                    $(".btnDeleteOwn").bind("click", DeleteOwn);
+                    $(".btnEditGB").bind("click", EditGB);
+                    $(".btnDeleteGB").bind("click", DeleteGB);
+                    $(".btnEditP").bind("click", EditP);
+                    $(".btnDeleteP").bind("click", DeleteP);
+                }
+
 
             }
         });
@@ -447,24 +430,17 @@ $(document).ready(function(){
             url: 'dashboard/get_product_client_info/?client_id='+client_id+'&product_id='+product_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                $.ajax({
-                    method: "get",
-                    dataType: 'json',
-                    url: 'welcome/check_user',
-                    success: function(data) {
-                        if(data.res == 'admin')
-                        {
-                            $(".btnEdit").bind("click", Edit);
-                            $(".btnDelete").bind("click", Delete);
-                            $(".btnEditOwn").bind("click", EditOwn);
-                            $(".btnDeleteOwn").bind("click", DeleteOwn);
-                            $(".btnEditGB").bind("click", EditGB);
-                            $(".btnDeleteGB").bind("click", DeleteGB);
-                            $(".btnEditP").bind("click", EditP);
-                            $(".btnDeleteP").bind("click", DeleteP);
-                        }
-                    }
-                });
+                if(localStorage.getItem('username') == 'admin')
+                {
+                    $(".btnEdit").bind("click", Edit);
+                    $(".btnDelete").bind("click", Delete);
+                    $(".btnEditOwn").bind("click", EditOwn);
+                    $(".btnDeleteOwn").bind("click", DeleteOwn);
+                    $(".btnEditGB").bind("click", EditGB);
+                    $(".btnDeleteGB").bind("click", DeleteGB);
+                    $(".btnEditP").bind("click", EditP);
+                    $(".btnDeleteP").bind("click", DeleteP);
+                }
 
             }
         });
@@ -487,24 +463,17 @@ $(document).ready(function(){
             url: 'dashboard/get_product_info/?product_id='+product_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                $.ajax({
-                    method: "get",
-                    dataType: 'json',
-                    url: 'welcome/check_user',
-                    success: function(data) {
-                        if(data.res == 'admin')
-                        {
-                            $(".btnEdit").bind("click", Edit);
-                            $(".btnDelete").bind("click", Delete);
-                            $(".btnEditOwn").bind("click", EditOwn);
-                            $(".btnDeleteOwn").bind("click", DeleteOwn);
-                            $(".btnEditGB").bind("click", EditGB);
-                            $(".btnDeleteGB").bind("click", DeleteGB);
-                            $(".btnEditP").bind("click", EditP);
-                            $(".btnDeleteP").bind("click", DeleteP);
-                        }
-                    }
-                });
+                if(localStorage.getItem('username') == 'admin')
+                {
+                    $(".btnEdit").bind("click", Edit);
+                    $(".btnDelete").bind("click", Delete);
+                    $(".btnEditOwn").bind("click", EditOwn);
+                    $(".btnDeleteOwn").bind("click", DeleteOwn);
+                    $(".btnEditGB").bind("click", EditGB);
+                    $(".btnDeleteGB").bind("click", DeleteGB);
+                    $(".btnEditP").bind("click", EditP);
+                    $(".btnDeleteP").bind("click", DeleteP);
+                }
 
             }
         });
@@ -518,24 +487,17 @@ $(document).ready(function(){
             url: 'dashboard/get_client_info/?client_id='+el.data('client_id'),
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                $.ajax({
-                    method: "get",
-                    dataType: 'json',
-                    url: 'welcome/check_user',
-                    success: function(data) {
-                        if(data.res == 'admin')
-                        {
-                            $(".btnEdit").bind("click", Edit);
-                            $(".btnDelete").bind("click", Delete);
-                            $(".btnEditOwn").bind("click", EditOwn);
-                            $(".btnDeleteOwn").bind("click", DeleteOwn);
-                            $(".btnEditGB").bind("click", EditGB);
-                            $(".btnDeleteGB").bind("click", DeleteGB);
-                            $(".btnEditP").bind("click", EditP);
-                            $(".btnDeleteP").bind("click", DeleteP);
-                        }
-                    }
-                });
+                if(localStorage.getItem('username') == 'admin')
+                {
+                    $(".btnEdit").bind("click", Edit);
+                    $(".btnDelete").bind("click", Delete);
+                    $(".btnEditOwn").bind("click", EditOwn);
+                    $(".btnDeleteOwn").bind("click", DeleteOwn);
+                    $(".btnEditGB").bind("click", EditGB);
+                    $(".btnDeleteGB").bind("click", DeleteGB);
+                    $(".btnEditP").bind("click", EditP);
+                    $(".btnDeleteP").bind("click", DeleteP);
+                }
 
             }
         });
