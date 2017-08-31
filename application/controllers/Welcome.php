@@ -21,7 +21,6 @@ class Welcome extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->database();
-        $this->load->library('session');
     }
 
     public function index()
@@ -31,9 +30,14 @@ class Welcome extends CI_Controller {
         $query = $this->db->get('products');
         $products = $query->result();
         $data = array('clients' => $clients, 'products' => $products);*/
-        if($this->session->has_userdata('logged_in'))
+        $this->db->select('logged_in');
+        $this->db->where('id', 1);
+        $query = $this->db->get('sess');
+        $res = $query->result()[0]->logged_in;
+        if($res != 'logout')
         {
-            $this->load->view('welcome');
+            $data = array('user' => $res);
+            $this->load->view('welcome', $data);
         }
         else
         {
@@ -52,25 +56,27 @@ class Welcome extends CI_Controller {
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
-            $newdata = array(
-                'username'  => $username,
-                'logged_in' => TRUE
-            );
-
-            $this->session->set_userdata($newdata);
+            $data = array('logged_in' => $username);
+            $this->db->where('id', 1);
+            $this->db->update('sess', $data);
         }
         redirect('welcome');
     }
 
     public function logout()
     {
-        $this->session->unset_userdata('logged_in');
-        $this->session->unset_userdata('username');
+        $data = array('logged_in' => 'logout');
+        $this->db->where('id', 1);
+        $this->db->update('sess', $data);
         redirect('welcome');
     }
 
     public function check_user()
     {
-        echo json_encode(array('res' => $this->session->userdata('username')));
+        $this->db->select('logged_in');
+        $this->db->where('id', 1);
+        $query = $this->db->get('sess');
+        $res = $query->result()[0]->logged_in;
+        echo json_encode(array('res' => $res));
     }
 }
