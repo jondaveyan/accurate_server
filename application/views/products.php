@@ -51,7 +51,7 @@
 <div class="products">
     <button id="new_product" class="btn btn-default">Նոր ապրանք</button>
     <button id="edit_product" class="btn btn-default">Փոփոխել</button>
-    <a href="welcome"><button class="btn btn-default">Հետ</button></a>
+    <button class="goToMenu btn btn-default">Հետ</button>
 </div>
 
 <?php $this->load->view('footer'); ?>
