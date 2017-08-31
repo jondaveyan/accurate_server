@@ -1,6 +1,6 @@
 <?php $this->load->view('header'); ?>
 <div id="container">
-	<a href="welcome"><button class="btn btn-default">Հետ</button></a>
+	<button class="goToMenu btn btn-default">Հետ</button>
 	<a href="debts"><button class="btn btn-default">Պարտքերի աղյուսակ</button></a>
 	<a href="getproduct"><button class="btn btn-default">Ներմուծում</button></a><br><br>
 	<div id="products_table">
