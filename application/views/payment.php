@@ -27,7 +27,7 @@
 </div>
 <div class="payment">
     <button id="new_payment" class="btn btn-default">Նոր վճարում</button>
-    <a href="welcome"><button class="btn btn-default">Հետ</button></a>
+    <button class="goToMenu btn btn-default">Հետ</button>
 </div>
 
 <?php $this->load->view('footer'); ?>
