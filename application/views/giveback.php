@@ -41,7 +41,7 @@
 </div>
 <div class="giveback">
     <button id="new_giveback" class="btn btn-default">Ապրանքի վերադարձ</button>
-    <a href="welcome"><button class="btn btn-default">Հետ</button></a>
+    <button class="goToMenu btn btn-default">Հետ</button>
 </div>
 
 <?php $this->load->view('footer'); ?>
