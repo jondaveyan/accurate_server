@@ -155,15 +155,15 @@ function DeleteOwn(){
 function SaveGB(){ var par = $(this).parent().parent();
     //var tdProduct = par.children("td:nth-child(1)");
     var tdQuantity = par.children("td:nth-child(2)");
-    var tdUseless = par.children("td:nth-child(3)");
-    var tdDate = par.children("td:nth-child(4)");
-    var tdButtons = par.children("td:nth-child(5)");
+    //var tdUseless = par.children("td:nth-child(3)");
+    var tdDate = par.children("td:nth-child(3)");
+    var tdButtons = par.children("td:nth-child(4)");
     var id = par.data('id');
     var product_id = par.data('product_id');
 
     //tdProduct.html(tdProduct.children("input[type=text]").val());
     tdQuantity.html(tdQuantity.children("input[type=text]").val());
-    tdUseless.html(tdUseless.children("input[type=text]").val());
+    //tdUseless.html(tdUseless.children("input[type=text]").val());
     tdDate.html(tdDate.children("input[type=text]").val());
     tdButtons.html('<button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>');
     $(".btnEditGB").bind("click", EditGB);
@@ -181,16 +181,17 @@ function SaveGB(){ var par = $(this).parent().parent();
     });
 };
 
-function EditGB(){ var par = $(this).parent().parent();
+function EditGB(){ 
+    var par = $(this).parent().parent();
     //var tdProduct = par.children("td:nth-child(1)");
     var tdQuantity = par.children("td:nth-child(2)");
-    var tdUseless = par.children("td:nth-child(3)");
-    var tdDate = par.children("td:nth-child(4)");
-    var tdButtons = par.children("td:nth-child(5)");
+    //var tdUseless = par.children("td:nth-child(3)");
+    var tdDate = par.children("td:nth-child(3)");
+    var tdButtons = par.children("td:nth-child(4)");
 
     //tdProduct.html("<input type='text' style='width: 100%;' id='txtProduct' value='"+tdProduct.html()+"'/>");
     tdQuantity.html("<input type='text' style='width: 100%;' id='txtQuantity' value='"+tdQuantity.html()+"'/>");
-    tdUseless.html("<input type='text' style='width: 100%;' id='txtUseless' value='"+tdUseless.html()+"'/>");
+    //tdUseless.html("<input type='text' style='width: 100%;' id='txtUseless' value='"+tdUseless.html()+"'/>");
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveGB btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
@@ -411,7 +412,7 @@ $(document).ready(function(){
                     url: 'welcome/check_user',
                     success: function(data) {
                         if(data.res == 'admin')
-                        {
+                        {alert("A");
                             $(".btnEdit").bind("click", Edit);
                             $(".btnDelete").bind("click", Delete);
                             $(".btnEditOwn").bind("click", EditOwn);
