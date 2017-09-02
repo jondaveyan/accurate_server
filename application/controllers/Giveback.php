@@ -131,15 +131,14 @@ class Giveback extends CI_Controller {
         $useless_quantity = $product->useless_quantity;
 
         $new_quantity = $quantity + $old_quantity - $this->input->post('quantity');
-        $new_useless_quantity = $useless_quantity - $old_useless_quantity + $this->input->post('useless_quantity');
+        //$new_useless_quantity = $useless_quantity - $old_useless_quantity + $this->input->post('useless_quantity');
 
         $this->db->where('id', $product_id);
-        $this->db->update('products', array('daily_order' => $new_quantity, 'useless_quantity' => $new_useless_quantity));
+        $this->db->update('products', array('daily_order' => $new_quantity));
         $date = str_replace('/', '-', $this->input->post('date'));
 
         $data = array(
             'quantity' => $this->input->post('quantity'),
-            'useless_quantity' => $this->input->post('useless_quantity'),
             'date' => date('Y-m-d', strtotime($date))
         );
 
