@@ -155,7 +155,7 @@ function SaveGB(){ var par = $(this).parent().parent();
     $(".btnEditGB").bind("click", EditGB);
     $(".btnDeleteGB").bind("click", DeleteGB);
 
-    var result = {'id': id, 'product_id': product_id, 'quantity': tdQuantity.html(), 'useless_quantity': tdUseless.html(), 'date': tdDate.html()};
+    var result = {'id': id, 'product_id': product_id, 'quantity': tdQuantity.html(), 'date': tdDate.html()};
 
     $.ajax({
         method: "post",
