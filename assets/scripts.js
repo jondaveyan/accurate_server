@@ -47,7 +47,7 @@ function Edit(){
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdType.html("<select style='width: 100%;' id='txtType'><option value='Օրավարձ'>Օրավարձ</option><option value='Վաճառք'>Վաճառք</option>");
     tdButtons.html('<button class="btnSave btn-info btn-xs"><span class="glyphicon glyphicon-ok"></span></button>');
-    if(localStorage.getItem('username') == 'admin')
+    if(localStorage.getItem('username') == 'admin123457')
     {
         $(".btnSave").bind("click", Save);
         $(".btnEdit").bind("click", Edit);
@@ -111,7 +111,7 @@ function EditOwn(){ var par = $(this).parent().parent();
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveOwn btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    if(localStorage.getItem('username') == 'admin')
+    if(localStorage.getItem('username') == 'admin123457')
     {
         $(".btnSaveOwn").bind("click", SaveOwn);
         $(".btnEditOwn").bind("click", EditOwn);
@@ -181,7 +181,7 @@ function EditGB(){
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveGB btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    if(localStorage.getItem('username') == 'admin')
+    if(localStorage.getItem('username') == 'admin123457')
     {
         $(".btnSaveGB").bind("click", SaveGB);
         $(".btnEditGB").bind("click", EditGB);
@@ -244,7 +244,7 @@ function EditP(){ var par = $(this).parent().parent();
     tdDate.html("<input type='text' style='width: 100%;' id='txtDate' value='"+tdDate.html()+"'/>");
     tdButtons.html('<button class="btnSaveP btn-info btn-xs"><span class="glyphicon glyphicon-ok"></button>');
 
-    if(localStorage.getItem('username') == 'admin')
+    if(localStorage.getItem('username') == 'admin123457')
     {
         $(".btnSaveP").bind("click", SaveP);
         $(".btnEditP").bind("click", EditP);
@@ -395,7 +395,7 @@ $(document).ready(function(){
             url: 'dashboard/get_client_info/?client_id='+client_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                if(localStorage.getItem('username') == 'admin')
+                if(localStorage.getItem('username') == 'admin123457')
                 {
                     $(".btnEdit").bind("click", Edit);
                     $(".btnDelete").bind("click", Delete);
@@ -430,7 +430,7 @@ $(document).ready(function(){
             url: 'dashboard/get_product_client_info/?client_id='+client_id+'&product_id='+product_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                if(localStorage.getItem('username') == 'admin')
+                if(localStorage.getItem('username') == 'admin123457')
                 {
                     $(".btnEdit").bind("click", Edit);
                     $(".btnDelete").bind("click", Delete);
@@ -463,7 +463,7 @@ $(document).ready(function(){
             url: 'dashboard/get_product_info/?product_id='+product_id+'&date_start='+date_start+'&date_end='+date_end,
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                if(localStorage.getItem('username') == 'admin')
+                if(localStorage.getItem('username') == 'admin123457')
                 {
                     $(".btnEdit").bind("click", Edit);
                     $(".btnDelete").bind("click", Delete);
@@ -487,7 +487,7 @@ $(document).ready(function(){
             url: 'dashboard/get_client_info/?client_id='+el.data('client_id'),
             success: function(data) {
                 $('#myModal .modal-content').html(data.html);
-                if(localStorage.getItem('username') == 'admin')
+                if(localStorage.getItem('username') == 'admin123457')
                 {
                     $(".btnEdit").bind("click", Edit);
                     $(".btnDelete").bind("click", Delete);
