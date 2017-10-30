@@ -7,7 +7,7 @@
 		<table>
 		<thead>
 			<tr>
-				<th style="vertical-align: middle; width: 360px;">Ապրանքի անուն</th>
+				<th style="vertical-align: middle; width: 192px;">Ապրանքի անուն</th>
 				<th style="vertical-align: middle; width: 30px;">Քան.</th>
 				<th style="vertical-align: middle; width: 30px;">Վաճ.</th>
 				<th style="vertical-align: middle; width: 30px;">Պահ.</th>
