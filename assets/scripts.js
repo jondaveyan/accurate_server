@@ -274,7 +274,7 @@ $(document).ready(function(){
 
 
     setTimeout(function(){ 
-        $('#products_table #first-th').style('width', 'auto');
+        $('#products_table #first-th').css('width', 'auto');
         if(localStorage.getItem('username') == null && window.location.href.substr(window.location.href.lastIndexOf('/') + 1) != '' && window.location.href.substr(window.location.href.lastIndexOf('/') + 1) != 'welcome')
         {
             window.location.href = window.location.origin;
