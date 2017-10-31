@@ -14,7 +14,7 @@
 				<!-- <th style="vertical-align: middle; width: 30px;">Ջրդ.</th>
 				<th style="vertical-align: middle; width: 30px;">Վն.</th> -->
 				<th style="vertical-align: middle; width: 25px;">Վարձ.</th>
-				<th style="vertical-align: middle; width: 25px;">Գույք.</th>
+				<th style="vertical-align: middle; width: 25px;">Գ.</th>
 				<?php
 				$i = 0;
 				$class = '';
