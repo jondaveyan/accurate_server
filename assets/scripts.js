@@ -284,6 +284,7 @@ $(document).ready(function(){
         [25, 50, 100, 200, -1],
         [25, 50, 100, 200, "All"]
     ]});
+    $('#products_table').style('width', 'auto');
     $.fn.datepicker.defaults.format = "dd/mm/yyyy";
     $('.datepicker').datepicker({
         "todayHighlight": true,
