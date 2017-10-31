@@ -274,6 +274,7 @@ $(document).ready(function(){
 
 
     setTimeout(function(){ 
+        $('#products_table').style('width', 'auto');
         if(localStorage.getItem('username') == null && window.location.href.substr(window.location.href.lastIndexOf('/') + 1) != '' && window.location.href.substr(window.location.href.lastIndexOf('/') + 1) != 'welcome')
         {
             window.location.href = window.location.origin;
@@ -284,7 +285,6 @@ $(document).ready(function(){
         [25, 50, 100, 200, -1],
         [25, 50, 100, 200, "All"]
     ]});
-    $('#products_table').style('width', 'auto');
     $.fn.datepicker.defaults.format = "dd/mm/yyyy";
     $('.datepicker').datepicker({
         "todayHighlight": true,
