@@ -8,13 +8,13 @@
 		<thead>
 			<tr>
 				<th style="vertical-align: middle; width: 192px;">Ապրանքի անուն</th>
-				<th style="vertical-align: middle; width: 30px;">Քան.</th>
-				<th style="vertical-align: middle; width: 30px;">Վաճ.</th>
-				<th style="vertical-align: middle; width: 30px;">Պահ.</th>
+				<th style="vertical-align: middle; width: 25px;">Քան.</th>
+				<th style="vertical-align: middle; width: 25px;">Վաճ.</th>
+				<th style="vertical-align: middle; width: 25px;">Պահ.</th>
 				<!-- <th style="vertical-align: middle; width: 30px;">Ջրդ.</th>
 				<th style="vertical-align: middle; width: 30px;">Վն.</th> -->
-				<th style="vertical-align: middle; width: 30px;">Վարձ.</th>
-				<th style="vertical-align: middle; width: 30px;">Գույք.</th>
+				<th style="vertical-align: middle; width: 25px;">Վարձ.</th>
+				<th style="vertical-align: middle; width: 25px;">Գույք.</th>
 				<?php
 				$i = 0;
 				$class = '';
