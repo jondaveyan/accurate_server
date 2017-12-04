@@ -70,7 +70,18 @@ class Debts extends CI_Controller {
 	    	$this->db->where('daily_sale', 'daily');
                 $query = $this->db->get('orders');
                 $product_price = $query->result();
-		    if(!isset($product_price[0])){var_dump($giveback, "AAAA");}
+		    if(!isset($product_price[0])){
+		    	$this->db->where('id', $client_id);
+		    	$query = $this->db->get('clients');
+			$client_name = $query->result()[0]->name;
+			    
+			$this->db->where('id', $giveback->product_id);
+		    	$query = $this->db->get('products');
+			$product_name = $query->result()[0]->name;
+			    
+			echo "<h1>Հետևյալ կլիենտով ու ապրանքով ձևակերպած է վերադարձ, բայց չի եղել այդպիսի վարձակալություն:</h1>";
+			echo "Կլիենտ: ".$client_name."<br>Ապրանք: ".$product_name;
+		    }
                 $product_price = $product_price[0]->daily_price;
                 $now = time(); // or your date as well
                 if($date)
