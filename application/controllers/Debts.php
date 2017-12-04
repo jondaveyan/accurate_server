@@ -70,6 +70,7 @@ class Debts extends CI_Controller {
 	    	$this->db->where('daily_sale', 'daily');
                 $query = $this->db->get('orders');
                 $product_price = $query->result();
+		    if(!isset($product_price[0])){var_dump($giveback, "AAAA");}
                 $product_price = $product_price[0]->daily_price;
                 $now = time(); // or your date as well
                 if($date)
