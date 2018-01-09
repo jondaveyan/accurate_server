@@ -10,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css'); ?>">
 </head>
 <body>
+    <?php echo "database:" . $this->db->database;?>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
