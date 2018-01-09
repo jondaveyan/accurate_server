@@ -1,9 +1,8 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+
 if(!isset($_SESSION['database']) )
    {
+	session_start();
 	   $_SESSION['database'] = 'default';
 }
 /**
