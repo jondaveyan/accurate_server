@@ -1,6 +1,13 @@
 <?php $this->load->view('header'); ?>
+
 <div class="container">
     <form method="POST" action="<?php echo base_url('welcome/login'); ?>">
+        
+        <label for="dbselect">Բազա</label>
+        <select id="dbselect" name="database">
+            <option value="new">Նորմալ</option>
+            <option value="old">Արխիվ</option>
+        </select>
         Username:
         <input name="username" class="form-control" type="text" />
         Password:
