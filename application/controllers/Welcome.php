@@ -47,7 +47,7 @@ class Welcome extends CI_Controller {
             $this->db->close();
 
             $this->db = $this->load->database($this->input->post('database'), true, false);
-             $ci->session->set_userdata('database',$this->input->post('database'));
+            setcookie("database",$this->input->post('database'));
             $username = $this->input->post('username');
             $password = $this->input->post('password');
             $this->db->select();
