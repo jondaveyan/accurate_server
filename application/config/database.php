@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-session_start();
+if(!isset($_SESSION))
+	session_start();
 
 /*
 | -------------------------------------------------------------------
