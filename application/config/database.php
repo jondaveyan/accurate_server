@@ -70,6 +70,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
+
+echo "SESSIONDB: " . $_SESSION['database'];
 if(isset($_SESSION['database']) && !empty($_SESSION['database']))
 {
 	$active_group = $_SESSION['database'];
