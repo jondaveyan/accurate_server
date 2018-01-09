@@ -42,6 +42,10 @@ class Welcome extends CI_Controller {
         }
         else
         {
+            $this->db->close();
+
+            $this->db = $this->load->database($this->input->post('database'), true);
+
             $username = $this->input->post('username');
             $password = $this->input->post('password');
             $this->db->select();
