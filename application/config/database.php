@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
- $ci = get_instance();
 
 
 /*
@@ -73,10 +72,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | the query builder class.
 */
 
-if(isset($ci->session->userdata['database']) && !empty($ci->session->userdata['database']))
+if(isset($_COOKIE["database"]) && !empty($_COOKIE["database"]))
 {
 
-	$active_group = $ci->session->userdata['database'];
+	$active_group = $_COOKIE["database"];
 	echo "SESSIONDB: " . $active_group;
 
 }
