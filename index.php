@@ -1,6 +1,9 @@
 <?php
 session_start();
-if(!isset($_SESSION['database']) {$_SESSION['database'] = 'default';}
+if(!isset($_SESSION['database']) )
+   {
+	   $_SESSION['database'] = 'default';
+}
 /**
  * CodeIgniter
  *
