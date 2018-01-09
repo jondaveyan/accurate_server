@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-if(!isset($_SESSION))
-	session_start();
+
 
 /*
 | -------------------------------------------------------------------
@@ -73,10 +72,10 @@ if(!isset($_SESSION))
 | the query builder class.
 */
 
-echo "SESSIONDB: " . $_SESSION['database'];
-if(isset($_SESSION['database']) && !empty($_SESSION['database']))
+echo "SESSIONDB: " . $_ENV['database'];
+if(isset($_ENV['database']) && !empty($_ENV['database']))
 {
-	$active_group = $_SESSION['database'];
+	$active_group = $_ENV['database'];
 
 }
 else
