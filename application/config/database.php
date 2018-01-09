@@ -72,17 +72,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | the query builder class.
 */
 
-if(isset($_COOKIE["database"]) && !empty($_COOKIE["database"]))
-{
+	$active_group = $_SESSION["database"];
 
-	$active_group = $_COOKIE["database"];
-	echo "SESSIONDB: " . $active_group;
-
-}
-else
-{
-	$active_group = 'default';
-}
 $query_builder = TRUE;
 
 $db['default'] = array(
