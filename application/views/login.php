@@ -5,7 +5,7 @@
         
         <label for="dbselect">Բազա</label>
         <select id="dbselect" name="database">
-            <option value="new">Նորմալ</option>
+            <option value="default">Նորմալ</option>
             <option value="old">Արխիվ</option>
         </select>
         Username:
