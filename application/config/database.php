@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+ $ci = get_instance();
 
 
 /*
@@ -73,9 +74,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 echo "SESSIONDB: " . $_ENV['database'];
-if(isset($_ENV['database']) && !empty($_ENV['database']))
+if(isset($ci->session->userdata['database']) && !empty($ci->session->userdata['database']))
 {
-	$active_group = $_ENV['database'];
+	$active_group = $ci->session->userdata['database'];
 
 }
 else
