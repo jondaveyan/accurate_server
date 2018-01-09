@@ -73,10 +73,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | the query builder class.
 */
 
-echo "SESSIONDB: " . $_ENV['database'];
 if(isset($ci->session->userdata['database']) && !empty($ci->session->userdata['database']))
 {
+
 	$active_group = $ci->session->userdata['database'];
+	echo "SESSIONDB: " . $active_group;
 
 }
 else
