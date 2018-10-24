@@ -56,7 +56,6 @@ class Giveback extends CI_Controller {
             'client_id' => $this->input->post('client_to_pick'),
             'product_id' => $this->input->post('product_to_pick'),
             'quantity' => $this->input->post('product_quantity'),
-            'product_price' => $this->input->post('product_price'),
             'bad_quantity' => $bad_quantity,
             'useless_quantity' => $useless_quantity,
             'date' => date('Y-m-d', strtotime($date))
@@ -140,7 +139,6 @@ class Giveback extends CI_Controller {
 
         $data = array(
             'quantity' => $this->input->post('quantity'),
-            'product_price' => $this->input->post('product_price'),
             'date' => date('Y-m-d', strtotime($date))
         );
 
