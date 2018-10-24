@@ -159,7 +159,7 @@ class Dashboard extends CI_Controller {
         $client = $query->result()[0];
         $client_name = $client->name;
 
- 		$this->db->select('products.name as product_name, giveback.quantity, giveback.product_price, giveback.useless_quantity, giveback.date, giveback.id, giveback.product_id');
+ 		$this->db->select('products.name as product_name, giveback.quantity, giveback.useless_quantity, giveback.date, giveback.id, giveback.product_id');
  		$this->db->where('client_id', $client_id);
  		$this->db->from('giveback');
  		$this->db->join('products', 'giveback.product_id = products.id');
@@ -267,7 +267,12 @@ class Dashboard extends CI_Controller {
             $giveback_amount = 0;
             foreach($givebacks as $giveback)
             {
-                $product_price = $giveback->product_price;
+                $this->db->where('client_id', $client_id);
+                $this->db->where('product_id', $giveback->product_id);
+	    	$this->db->where('daily_sale', 'daily');
+                $query = $this->db->get('orders');
+                $product_price = $query->result();
+                $product_price = $product_price[0]->daily_price;
 				$now = time(); // or your date as well
 				if($date)
 				{
@@ -395,7 +400,7 @@ class Dashboard extends CI_Controller {
 			}
 			$html .= '<tr><td></td><td colspan="2">'.$sum.'</td><td colspan="3"></td></tr>';
 			$html .= '</table></div><div class="horizontal-div"><h3>Վերադարձ</h3>';
-			$html .= '<table class="table"><thead><th>Ապրանք</th><th>Քանակ</th><th>Գին</th><th>Ամսաթիվ</th><th>Գործ.</th></thead>';
+			$html .= '<table class="table"><thead><th>Ապրանք</th><th>Քանակ</th><th>Ամսաթիվ</th><th>Գործ.</th></thead>';
             $check = 0;
             $sum = 0;
             $check_tr = false;
@@ -405,10 +410,10 @@ class Dashboard extends CI_Controller {
                 $this->db->where('product_id', $giveback->product_id);
                 $this->db->where('client_id', $client_id);
                 $this->db->where('daily_sale', 'daily');
-		        $this->db->where('date <=', $giveback->date);
+		$this->db->where('date <=', $giveback->date);
                 $this->db->order_by("id", "desc");
                 $query = $this->db->get('orders')->result();
-                $giveback_price = $giveback->product_price;
+                $giveback_price = $query[0]->daily_price;
                 $check_tr = false;
                 if($interval)
                 {
@@ -435,7 +440,7 @@ class Dashboard extends CI_Controller {
                 {
                     $html .= '<tr><td></td><td colspan="2">'.$res_sum.'</td><td colspan="2"></td></tr>';
                 }
-				$html .= '<tr data-id="'.$giveback->id.'" data-product_id="'.$giveback->product_id.'"><td>'.$giveback->product_name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->product_price.'</td><td>'.$giveback->date.'</td><td><button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
+				$html .= '<tr data-id="'.$giveback->id.'" data-product_id="'.$giveback->product_id.'"><td>'.$giveback->product_name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->date.'</td><td><button class="btnEditGB btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button><button class="btnDeleteGB btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></td></tr>';
 			}
             $html .= '<tr><td></td><td colspan="2">'.$sum.'</td><td colspan="2"></td></tr>';
 			$html .= '</table></div></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Փակել</button></div>';
@@ -488,12 +493,7 @@ class Dashboard extends CI_Controller {
                 </div>
             </div><button class="btn btn-lg btn-success" data-client_id="'.$client_id.'" data-product_id="'.$product_id.'" id="set_interval_product_client">Հաստատել</button>';
 		$html .= '<div class="modal-body"><div class="col-md-6"><h3>Ապրանքի վերադարձ</h3>';
-        if($client->own == "yes") {
-            $html .= '<table class="table"><th>Քանակ</th><th>Ամսաթիվ</th>';
-        }
-        else {
-            $html .= '<table class="table"><th>Քանակ</th><th>Գին</th><th>Ամսաթիվ</th>';
-        }
+		$html .= '<table class="table"><th>Քանակ</th><th>Ամսաթիվ</th>';
 		foreach($givebacks as $giveback)
 		{
             if($interval)
@@ -503,13 +503,7 @@ class Dashboard extends CI_Controller {
                     continue;
                 }
             }
-            if($client->own == "yes") {
-                $html .= '<tr><td>'.$giveback->quantity.'</td><td>'.$giveback->date.'</td></tr>';
-            }
-            else {
-                $html .= '<tr><td>'.$giveback->quantity.'</td><td>'.$giveback->product_price.'</td><td>'.$giveback->date.'</td></tr>';
-            }
-
+			$html .= '<tr><td>'.$giveback->quantity.'</td><td>'.$giveback->date.'</td></tr>';
 		}
 		$html .= '</table></div><div class="col-md-6"><h3>Գործարքներ</h3>';
 		$html .= '<table class="table"><th>Քանակ</th><th>Գին</th><th>Ամսաթիվ</th><th>Գործարքի տեսակ</th>';
@@ -565,7 +559,7 @@ class Dashboard extends CI_Controller {
 		$this->db->where('product_id', $product_id);
 		$orders = $this->db->get('orders')->result();
 
-		$this->db->select('giveback.quantity, giveback.product_price, giveback.date, clients.name');
+		$this->db->select('giveback.quantity, giveback.date, clients.name');
 		$this->db->from('giveback');
 		$this->db->join('clients', 'giveback.client_id=clients.id');
 		$this->db->where('product_id', $product_id);
@@ -586,7 +580,7 @@ class Dashboard extends CI_Controller {
                 </div>
             </div><button class="btn btn-lg btn-success" data-product_id="'.$product_id.'" id="set_interval_product">Հաստատել</button>
             <div class="modal-body"><div class="col-md-4"><h3>Ապրանքի վերադարձ</h3>';
-		$html .= '<table class="table"><th>Կլիենտ</th><th>Քանակ</th><th>Գին</th><th>Ամսաթիվ</th>';
+		$html .= '<table class="table"><th>Կլիենտ</th><th>Քանակ</th><th>Ամսաթիվ</th>';
 		foreach($givebacks as $giveback)
 		{
             if($interval)
@@ -596,7 +590,7 @@ class Dashboard extends CI_Controller {
                     continue;
                 }
             }
-			$html .= '<tr><td>'.$giveback->name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->product_price.'</td><td>'.$giveback->date.'</td></tr>';
+			$html .= '<tr><td>'.$giveback->name.'</td><td>'.$giveback->quantity.'</td><td>'.$giveback->date.'</td></tr>';
 		}
 		$sales = array();
 		$dailies = array();
