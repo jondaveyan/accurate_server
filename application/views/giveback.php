@@ -23,6 +23,8 @@
         </select><br>
         Ապրանքի քանակ:<br>
         <input id="product_q" type="number" step="0.01" name="product_quantity" /><br>
+        Ապրանքի գին:<br>
+        <input id="product_p" type="number" name="product_price" /><br>
         Վնասվածների քանակ:<br>
         <input id="bad_q" type="number" step="0.01" name="bad_quantity" /><br>
         Ջարդվածների քանակ:<br>
