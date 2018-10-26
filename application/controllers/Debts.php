@@ -82,7 +82,7 @@ class Debts extends CI_Controller {
 			echo "<h1>Հետևյալ կլիենտով ու ապրանքով ձևակերպած է վերադարձ, բայց չի եղել այդպիսի վարձակալություն:</h1>";
 			echo "<h3>Կլիենտ: ".$client_name."</h3><h3>Ապրանք: ".$product_name."</h3><h3>Ամսաթիվ: ".$giveback->date."</h3>";
 		    }
-                $product_price = $product_price[0]->daily_price;
+                $product_price = $giveback->product_price; //$product_price[0]->daily_price;
                 $now = time(); // or your date as well
                 if($date)
                 {
