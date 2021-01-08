@@ -8,6 +8,7 @@
             <option value="default">Նորմալ</option>
             <option value="old2">Արխիվ 2</option>
             <option value="old">Արխիվ</option>
+            <!-- <option value="test">Test</option> -->
         </select>
         Username:
         <input name="username" class="form-control" type="text" />
