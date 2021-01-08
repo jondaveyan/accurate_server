@@ -6,6 +6,8 @@
         <label for="dbselect">Բազա</label>
         <select id="dbselect" name="database">
             <option value="default">Նորմալ</option>
+            <option value="old4">Արխիվ 4</option>
+            <option value="old3">Արխիվ 3</option>
             <option value="old2">Արխիվ 2</option>
             <option value="old">Արխիվ</option>
         </select>
