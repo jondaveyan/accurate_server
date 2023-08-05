@@ -35,9 +35,9 @@ class Giveback extends CI_Controller {
     public function new_giveback()
     {
 
-        $bad_quantity = $this->input->post('bad_quantity');
-        $useless_quantity = $this->input->post('useless_quantity');
-        $product_id = $this->input->post('product_to_pick');
+        $bad_quantity = intval($this->input->post('bad_quantity'));
+        $useless_quantity = intval($this->input->post('useless_quantity'));
+        $product_id = intval($this->input->post('product_to_pick'));
         $this->db->select('bad_quantity, useless_quantity, daily_order');
         $this->db->where('id', $product_id);
         $query = $this->db->get('products');

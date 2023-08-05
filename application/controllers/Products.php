@@ -70,8 +70,8 @@ class Products extends CI_Controller {
             'product_name' => $this->input->post('name'),
             'product_quantity' => $this->input->post('get_quantity'),
             'date' => date("Y-m-d")
-        );
-        if($this->input->post('get_quantity') != "" || $this->input->post('get_quantity') != 0)
+	);
+        if($this->input->post('get_quantity') != "" || is_numeric($this->input->post('get_quantity')) != 0)
         {
             $this->db->insert('new_products', $data);
         }
